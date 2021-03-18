@@ -17,6 +17,7 @@ export const SignInForm = ({navigation}: SignInFormProps) => {
   const dispatch = useDispatch()
   const selectUser = (state: RootState) => state.user
   const user = useSelector(selectUser)
+  console.log("======== Sign In Form ========")
   console.log(user)
 
   return (
