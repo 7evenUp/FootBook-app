@@ -1,1 +1,5 @@
 export { Input } from './Input'
+export { LogoHeader } from './LogoHeader'
+export { SignInForm } from './SignInForm'
+export { SignUpForm } from './SignUpForm'
+export { Socials } from './Socials'
