@@ -24,7 +24,8 @@ const theme = createTheme({
     white: palette.white,
     greyLight: palette.greyLight,
     greenDark: palette.greenDark,
-    red: palette.red
+    greenLight: palette.greenLight,
+    red: palette.red,
   },
   spacing: {
     s: 8,

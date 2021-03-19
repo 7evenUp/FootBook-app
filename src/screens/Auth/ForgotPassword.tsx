@@ -1,26 +1,18 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
 import { AuthStackRoutes, StackNavigationProps } from '../../navigation/types'
-import { palette } from '../../themes/default'
+import { Box } from '../../themes/default'
 import { LogoHeader, ResetPassword, Socials } from './components'
 
 const ForgotPassword = ({ navigation, route }: StackNavigationProps<AuthStackRoutes, 'ForgotPassword'>) => {
   return (
-    <View style={styles.container}>
+    <Box style={{flex: 1}} backgroundColor="greenLight">
       <LogoHeader header="Forgot password?" />
 
-      <ResetPassword navigation={navigation}/>
+      <ResetPassword />
 
       <Socials />
-    </View>
+    </Box>
   )
 }
 
 export default ForgotPassword
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: palette.greenLight
-  },
-})

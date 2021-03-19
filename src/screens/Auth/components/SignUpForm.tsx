@@ -2,18 +2,14 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useDispatch, useSelector } from 'react-redux'
-import { StackNavigationProp } from '@react-navigation/stack'
-import { AuthStackRoutes } from '../../../navigation/types'
 import { RootState } from '../../../redux'
 import { fetchUserLogin } from '../../../redux/user/actions'
 import { Box, Text, palette } from '../../../themes/default'
 import { Input } from './Input'
+import { useNavigation } from '@react-navigation/core'
 
-interface SignUpFormProps {
-  navigation: StackNavigationProp<AuthStackRoutes, "SignUp">
-}
-
-export const SignUpForm = ({navigation}: SignUpFormProps) => {
+export const SignUpForm = () => {
+  const navigation = useNavigation()
   const dispatch = useDispatch()
   const selectUser = (state: RootState) => state.user
   const user = useSelector(selectUser)
