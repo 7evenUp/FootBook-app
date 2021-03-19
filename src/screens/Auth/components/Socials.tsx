@@ -1,27 +1,43 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Linking } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { Box, Text } from '../../../themes/default'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+
+const socialsData = [
+  {
+    name: 'logo-vk',
+    url: 'vk://vk.com/aptem_oxa',
+    supUrl: 'https://vk.com/aptem_oxa'
+  },
+  {
+    name: 'logo-instagram',
+    url: 'instagram://user?username=7_even_up',
+    supUrl: 'https://www.instagram.com/7_even_up/'
+  },
+  {
+    name: 'logo-twitter',
+    url: 'twitter://user?screen_name=_7even_up_',
+    supUrl: 'https://www.twitter.com/_7even_up_'
+  },
+]
 
 export const Socials = () => {
   return (
     <Box style={styles.socials} mt="l">
       <Text variant="Poppins400Size14ColorGreyDark">Check our socials</Text>
       <Box flexDirection="row" alignItems="center" mt="s">
-        <TouchableOpacity onPress={() => {
-        }}>
-          <Box backgroundColor="greyDark" style={styles.socialsItem} mr="l">
-            <Ionicons name="logo-vk" size={26} color="white" />
-          </Box>
-        </TouchableOpacity>
-        
-        <Box backgroundColor="greyDark" style={styles.socialsItem} mr="l">
-          <Ionicons name="logo-instagram" size={26} color="white" />
-        </Box>
-        <Box backgroundColor="greyDark" style={styles.socialsItem}>
-          <Ionicons name="logo-twitter" size={26} color="white" />
-        </Box>
+        {socialsData.map((social, index) => (
+          <TouchableOpacity key={index} onPress={async () => {
+            const supported = await Linking.canOpenURL(social.url)
+
+            supported ? Linking.openURL(social.url) : Linking.openURL(social.supUrl)
+          }}>
+            <Box backgroundColor="greyDark" style={styles.socialsItem} mr="l">
+              <Ionicons name={social.name} size={26} color="white" />
+            </Box>
+          </TouchableOpacity>
+        ))}
       </Box>
     </Box>
   )
