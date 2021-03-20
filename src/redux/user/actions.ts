@@ -1,19 +1,31 @@
-import { User, UserActionTypes, FETCH_USER_LOGIN, FETCH_USER_LOGOUT , FETCH_USER_SUCCESS, FETCH_USER_FAILURE} from './types'
+import { 
+  User,
+  UserActionTypes,
+  USER_SIGNIN,
+  USER_SIGNUP,
+  USER_LOGOUT,
+  USER_SUCCESS,
+  USER_FAILURE
+} from './types'
 
-export const fetchUserLogin = ():UserActionTypes => ({
-  type: FETCH_USER_LOGIN
+export const userSignIn = ():UserActionTypes => ({
+  type: USER_SIGNIN
 })
 
-export const fetchUserLogout = ():UserActionTypes => ({
-  type: FETCH_USER_LOGOUT
+export const userSignUp = ():UserActionTypes => ({
+  type: USER_SIGNUP
 })
 
-export const fetchUserSuccess = (payload: { user: User, isLogedIn: boolean }):UserActionTypes => ({
-  type: FETCH_USER_SUCCESS,
+export const userLogout = ():UserActionTypes => ({
+  type: USER_LOGOUT
+})
+
+export const userSuccess = (payload: { user: User, isLogedIn: boolean }):UserActionTypes => ({
+  type: USER_SUCCESS,
   payload
 })
 
-export const fetchUserFailure = (error: string):UserActionTypes => ({
-  type: FETCH_USER_FAILURE,
+export const userFailure = (error: string):UserActionTypes => ({
+  type: USER_FAILURE,
   error
 })

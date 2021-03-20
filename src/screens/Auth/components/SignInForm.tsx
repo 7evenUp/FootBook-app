@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../redux'
-import { fetchUserLogin } from '../../../redux/user/actions'
+import { userSignIn } from '../../../redux/user/actions'
 import { Box, Text, palette } from '../../../themes/default'
 import { Input } from './Input'
 import { useNavigation } from '@react-navigation/core'
@@ -29,7 +29,7 @@ export const SignInForm = () => {
       <Box alignItems="center">
         <TouchableOpacity
           style={{ borderWidth: 1, borderRadius: 20, borderColor: palette.greyDark, width: 272, paddingVertical: 8 }}
-          onPress={() => { dispatch(fetchUserLogin()) }} >
+          onPress={() => { dispatch(userSignIn()) }} >
           <Text variant="Poppins400Size24ColorWhite" color="greyDark" textAlign="center">{user.isFetching ? <>Loading...</> : <>Sign In</>}</Text>
         </TouchableOpacity>
         <Box flexDirection="row" marginVertical="xl">

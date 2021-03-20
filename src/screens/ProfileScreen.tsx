@@ -4,7 +4,7 @@ import { StackNavigationProps, AppRoutes } from '../navigation/types'
 import { Video, AVPlaybackStatus } from 'expo-av'
 import firebase from '../firebase/firebaseConfig'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchUserLogout } from '../redux/user/actions'
+import { userLogout } from '../redux/user/actions'
 import { RootState } from '../redux'
 
 class VideoContainer extends PureComponent {
@@ -104,7 +104,7 @@ const HomeScreen = ({ navigation }: StackNavigationProps<AppRoutes, 'Profile'>) 
       />
       <Button
         title="SIGN OUT"
-        onPress={() => dispatch(fetchUserLogout())}
+        onPress={() => dispatch(userLogout())}
       />
     </View>
   )

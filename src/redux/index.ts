@@ -9,9 +9,12 @@ export const rootReducer = combineReducers({
 export type RootState = ReturnType<typeof rootReducer>
 
 export const createAppStore = () => {
+
   const store = createStore(
     rootReducer,
-    compose(applyMiddleware(userFetchingMiddleware))
+    compose(
+      applyMiddleware(userFetchingMiddleware),
+    )
   )
 
   return store

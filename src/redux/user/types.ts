@@ -10,30 +10,35 @@ export interface UserState {
   error: string | null
 }
 
-export const FETCH_USER_LOGIN = 'FETCH_USER_LOGIN'
-export const FETCH_USER_LOGOUT = 'FETCH_USER_LOGOUT'
-export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS'
-export const FETCH_USER_FAILURE = 'FETCH_USER_FAILURE'
+export const USER_SIGNIN = 'USER_SIGNIN'
+export const USER_SIGNUP = 'USER_SIGNUP'
+export const USER_LOGOUT = 'USER_LOGOUT'
+export const USER_SUCCESS = 'USER_SUCCESS'
+export const USER_FAILURE = 'USER_FAILURE'
 
-interface FetchUserLoginAction {
-  type: typeof FETCH_USER_LOGIN
+interface UserSignInAction {
+  type: typeof USER_SIGNIN
 }
 
-interface FetchUserLogoutAction {
-  type: typeof FETCH_USER_LOGOUT
+interface UserSignUpAction {
+  type: typeof USER_SIGNUP
 }
 
-interface FetchUserSuccessAction {
-  type: typeof FETCH_USER_SUCCESS
+interface UserLogoutAction {
+  type: typeof USER_LOGOUT
+}
+
+interface UserSuccessAction {
+  type: typeof USER_SUCCESS
   payload: {
     user: User,
     isLogedIn: boolean
   }
 }
 
-interface FetchUserFailureAction {
-  type: typeof FETCH_USER_FAILURE
+interface UserFailureAction {
+  type: typeof USER_FAILURE
   error: string
 }
 
-export type UserActionTypes = FetchUserLoginAction | FetchUserLogoutAction | FetchUserSuccessAction | FetchUserFailureAction
+export type UserActionTypes = UserSignInAction | UserSignUpAction | UserLogoutAction | UserSuccessAction | UserFailureAction
