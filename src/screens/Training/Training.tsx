@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { Dimensions, StyleSheet, View } from 'react-native'
-import { Video, AVPlaybackStatus } from 'expo-av'
+import { Video } from 'expo-av'
 import { CollectionStackRoutes, StackNavigationProps } from '../../navigation/types'
 import { Box,  Text } from '../../themes/default'
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
@@ -13,7 +13,6 @@ const Training = ({ navigation, route }: StackNavigationProps<CollectionStackRou
         ref={async (component) => {
           const playbackObject = component
           await playbackObject?.unloadAsync()
-          // playbackObject?.setStatusAsync
           await playbackObject?.loadAsync(source, {
             shouldPlay: true,
             isLooping: true,

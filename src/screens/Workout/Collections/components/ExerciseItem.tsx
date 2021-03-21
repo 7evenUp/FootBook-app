@@ -29,15 +29,6 @@ const ExerciseItem = ({ name, info, time, video }: ExerciseItemProps) => {
             source={video}
             style={{width: 100, height: 100}}
           />
-          {/* <Video
-            source={video}
-            rate={1.0}
-            volume={0.0}
-            isMuted={false}
-            resizeMode="cover"
-            shouldPlay={false}
-            isLooping
-            style={{ width: 100, height: 100 }} /> */}
           <Text variant='Poppins400Size18ColorBlack' ml='l' mr='m'>
             {Math.floor(time / 60)}:{time % 60}
           </Text>

@@ -1,12 +1,12 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { useNavigation } from '@react-navigation/core'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../redux'
 import { userSignUp } from '../../../redux/user/actions'
 import { Box, Text, palette } from '../../../themes/default'
 import { Input } from './Input'
-import { useNavigation } from '@react-navigation/core'
 import { userErrorSelector } from '../../../redux/user/selectors'
 
 export const SignUpForm = () => {

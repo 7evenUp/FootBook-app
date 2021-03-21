@@ -14,6 +14,7 @@ import { palette } from '../themes/default'
 import { AuthScreen } from '../screens/Auth'
 import Training from '../screens/Training/Training'
 import LoadAssets from '../components/LoadAssets'
+import { userIsLogedInSelector } from '../redux/user/selectors'
 
 const Tab = createBottomTabNavigator<AppRoutes>()
 
@@ -24,10 +25,10 @@ const AppTabs = () => {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName
 
-          if (route.name === 'Home') iconName = 'home' //<MaterialIcons name="home-filled" size={24} color="black" />
-          else if (route.name === 'Workout') iconName = 'football' // <MaterialIcons name="home-filled" size={24} color="black" />
+          if (route.name === 'Home') iconName = 'home' 
+          else if (route.name === 'Workout') iconName = 'football' 
           else if (route.name === 'Statistics') iconName = 'stats-chart'
-          else if (route.name === 'Profile') iconName = 'person' //<MaterialIcons name="account-circle" size={24} color="black" />
+          else if (route.name === 'Profile') iconName = 'person' 
 
           return <Ionicons name={iconName} size={30} color={color} />;
         }
@@ -83,18 +84,12 @@ const assets = [
 const Stack = createStackNavigator()
 
 const AppNavigator = () => {
-  useEffect(() => {
-    // firebase.auth().signOut()
-    console.log(firebase.name)
-  }, [])
-
-  const selectorUser = (state: RootState) => state.user
-  const user = useSelector(selectorUser)
+  const userIsLogedIn = useSelector(userIsLogedInSelector)
 
   return (
     <LoadAssets {...{ fonts, assets }}>
       <Stack.Navigator headerMode='none'>
-        {user.isLogedIn ? (
+        {userIsLogedIn ? (
           <>
             <Stack.Screen name="App" component={AppTabs} />
             <Stack.Screen name="Training" component={Training} />

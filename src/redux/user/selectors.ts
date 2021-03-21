@@ -12,3 +12,8 @@ export const userErrorSelector = createSelector(
   userDataSelector,
   user => user.error
 )
+
+export const userIsLogedInSelector = createSelector(
+  userDataSelector,
+  user => user.isLogedIn
+)
