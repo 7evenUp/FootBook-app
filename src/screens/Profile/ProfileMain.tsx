@@ -7,12 +7,29 @@ import { userLogout } from '../../redux/user/actions'
 
 const ProfileMain = ({ navigation, route }: StackNavigationProps<ProfileStackRoutes, 'ProfileMain'>) => {
   const dispatch = useDispatch()
+  
   return (
     <View>
       <SafeAreaView>
         <Text>Profile Main</Text>
         <Button
-          title="SIGN OUT"
+          title="Favourites"
+          onPress={() => navigation.navigate('Favourites')}
+        />
+        <Button
+          title="Settings"
+          onPress={() => navigation.navigate('Settings')}
+        />
+        <Button
+          title="Paid subscription"
+          onPress={() => navigation.navigate('Subscription')}
+        />
+        <Button
+          title="Edit profile"
+          onPress={() => navigation.navigate('EditProfile')}
+        />
+        <Button
+          title="Change account"
           onPress={() => dispatch(userLogout())}
         />
       </SafeAreaView>
