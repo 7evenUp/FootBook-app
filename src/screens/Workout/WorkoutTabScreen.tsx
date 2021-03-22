@@ -1,16 +1,18 @@
 import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { StyleSheet} from 'react-native'
-import { WorkoutTabRoutes } from './types'
-import { WorkoutBuilderScreen, MyWorkoutsScreen, CollectionsStackScreen } from '../screens/Workout'
+import { StyleSheet } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Dimensions } from 'react-native';
+import { WorkoutTabRoutes } from '../../navigation/types';
+import { CollectionsStackScreen } from './Collections';
+import WorkoutBuilderScreen from './WorkoutBuilderScreen';
+import MyWorkoutsScreen from './MyWorkoutsScreen';
 
 const Tab = createMaterialTopTabNavigator<WorkoutTabRoutes>()
 
 const WorkoutTabScreen = () => {
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <Tab.Navigator
         tabBarOptions={{
           labelStyle: {
@@ -22,10 +24,10 @@ const WorkoutTabScreen = () => {
           style: styles.navigator,
         }}
         sceneContainerStyle={styles.screens}
-        >
-        <Tab.Screen name="Collections" component={CollectionsStackScreen} options={{ title: "Collections" }}/>
-        <Tab.Screen name="WorkoutBuilder" component={WorkoutBuilderScreen} options={{ title: "Workout Builder" }}/>
-        <Tab.Screen name="MyWorkouts" component={MyWorkoutsScreen} options={{title: "My workouts"}}/>
+      >
+        <Tab.Screen name="Collections" component={CollectionsStackScreen} options={{ title: "Collections" }} />
+        <Tab.Screen name="WorkoutBuilder" component={WorkoutBuilderScreen} options={{ title: "Workout Builder" }} />
+        <Tab.Screen name="MyWorkouts" component={MyWorkoutsScreen} options={{ title: "My workouts" }} />
       </Tab.Navigator>
     </SafeAreaView>
   )

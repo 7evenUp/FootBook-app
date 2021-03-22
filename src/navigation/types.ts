@@ -37,6 +37,14 @@ export type CollectionStackRoutes = {
   };
 }
 
+export type ProfileStackRoutes = {
+  ProfileMain: undefined;
+  Favourites: undefined;
+  Settings: undefined;
+  Subscription: undefined;
+  EditProfile: undefined;
+}
+
 export type AuthStackRoutes = {
   SignIn: undefined;
   SignUp: undefined;

@@ -1,13 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useSelector } from 'react-redux'
-import {  RootState } from '../redux'
 import { Ionicons } from '@expo/vector-icons'
-import firebase from '../firebase/firebaseConfig'
 
-import { HomeScreen, StatisticsScreen, ProfileScreen } from '../screens'
-import WorkoutTabScreen from './WorkoutTabScreen'
+import { HomeScreen, StatisticsScreen, ProfileStackScreen, WorkoutTabScreen } from '../screens'
 
 import { AppRoutes } from './types'
 import { palette } from '../themes/default'
@@ -43,7 +40,7 @@ const AppTabs = () => {
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Workout" component={WorkoutTabScreen} options={{ title: 'Workout' }} />
       <Tab.Screen name="Statistics" component={StatisticsScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Profile" component={ProfileStackScreen} />
     </Tab.Navigator>
   )
 }
