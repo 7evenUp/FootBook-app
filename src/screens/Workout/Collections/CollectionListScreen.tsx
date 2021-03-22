@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { CollectionStackRoutes, StackNavigationProps } from '../../../navigation/types'
-import CollectionScrollView from './components/CollectionScrollView'
+import { CollectionScrollView } from './components'
 
 const data = [
   {

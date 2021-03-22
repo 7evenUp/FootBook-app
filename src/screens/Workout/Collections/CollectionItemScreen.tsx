@@ -4,7 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { RectButton, ScrollView } from 'react-native-gesture-handler'
 import { CollectionStackRoutes, StackNavigationProps } from '../../../navigation/types'
 import { Box, Text } from '../../../themes/default'
-import ExerciseList from './components/ExerciseList'
+import { ExerciseList } from './components'
 
 const CollectionItem = ({ navigation, route }: StackNavigationProps<CollectionStackRoutes, 'CollectionItem'>) => {
   return (

@@ -1,5 +1,5 @@
-import { LinearGradient } from 'expo-linear-gradient'
 import React from 'react'
+import { LinearGradient } from 'expo-linear-gradient'
 import { ImageBackground, StyleSheet } from 'react-native'
 import { RectButton } from 'react-native-gesture-handler'
 import { Text, Box } from '../../../../themes/default'
