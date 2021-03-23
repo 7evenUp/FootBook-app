@@ -9,8 +9,7 @@ const ProfileMain = ({ navigation, route }: StackNavigationProps<ProfileStackRou
   const dispatch = useDispatch()
   
   return (
-    <View>
-      <SafeAreaView>
+    <View style={styles.container}>
         <Text>Profile Main</Text>
         <Button
           title="Favourites"
@@ -32,11 +31,14 @@ const ProfileMain = ({ navigation, route }: StackNavigationProps<ProfileStackRou
           title="Change account"
           onPress={() => dispatch(userLogout())}
         />
-      </SafeAreaView>
     </View>
   )
 }
 
 export default ProfileMain
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  }
+})

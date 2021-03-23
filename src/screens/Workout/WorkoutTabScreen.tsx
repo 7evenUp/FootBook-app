@@ -1,8 +1,7 @@
 import React from 'react'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Dimensions } from 'react-native';
 import { WorkoutTabRoutes } from '../../navigation/types';
 import { CollectionsStackScreen } from './Collections';
 import WorkoutBuilderScreen from './WorkoutBuilderScreen';
