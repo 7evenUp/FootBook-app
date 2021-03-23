@@ -121,6 +121,12 @@ const theme = createTheme({
       fontFamily: 'Poppins-Bold',
       fontSize: 18,
       lineHeight: 27
+    },
+    Poppins700Size24ColorBlack: {
+      color: 'black',
+      fontFamily: 'Poppins-Bold',
+      fontSize: 24,
+      lineHeight: 36
     }
   }
 })
