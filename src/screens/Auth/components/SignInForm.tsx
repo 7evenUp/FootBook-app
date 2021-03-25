@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../../redux'
 import { userSignIn } from '../../../redux/user/actions'
 import { Box, Text, palette } from '../../../themes/default'
-import { Input } from './Input'
 import { useNavigation } from '@react-navigation/core'
+import { TextInput } from '../../../components'
 
 export const SignInForm = () => {
   const navigation = useNavigation()
@@ -19,8 +19,8 @@ export const SignInForm = () => {
   return (
     <View style={styles.form}>
       <Box>
-        <Input placeholder="Enter your email" />
-        <Input placeholder="Enter your password" isPassword={true} />
+        <TextInput placeholder="Enter your email" />
+        <TextInput placeholder="Enter your password" isPassword={true} />
         <TouchableOpacity style={styles.forgotBtn} onPress={() => { navigation.navigate("ForgotPassword") }}>
           <Text color="greyDark" mt="m">Forgot password?</Text>
         </TouchableOpacity>

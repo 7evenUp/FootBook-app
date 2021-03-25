@@ -3,9 +3,9 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useDispatch } from 'react-redux'
-import { fetchUserLogin } from '../../../redux/user/actions'
+import { TextInput } from '../../../components'
+import { userSignIn } from '../../../redux/user/actions'
 import { Box, Text, palette } from '../../../themes/default'
-import { Input } from './Input'
 
 
 export const ResetPassword = () => {
@@ -20,13 +20,13 @@ export const ResetPassword = () => {
           textAlign="center"
           mt="xxl"
           paddingHorizontal="xxl">Enter the email associated with your account</Text>
-        <Input placeholder="Enter your email" />
+        <TextInput placeholder="Enter your email" />
       </Box>
 
       <Box alignItems="center">
         <TouchableOpacity
           style={{ borderWidth: 1, borderRadius: 20, borderColor: palette.greyDark, width: 272, paddingVertical: 8 }}
-          onPress={() => { dispatch(fetchUserLogin()) }} >
+          onPress={() => { dispatch(userSignIn()) }} >
           <Text variant="Poppins400Size24ColorWhite" color="greyDark" textAlign="center">Reset password</Text>
         </TouchableOpacity>
         <Box marginVertical="xl" alignItems="center">

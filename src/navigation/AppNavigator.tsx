@@ -10,9 +10,8 @@ import { AppRoutes } from './types'
 import { palette } from '../themes/default'
 import { AuthScreen } from '../screens/Auth'
 import Training from '../screens/Training/Training'
-import LoadAssets from '../components/LoadAssets'
+import { LoadAssets } from '../components'
 import { userIsLogedInSelector } from '../redux/user/selectors'
-import { Dimensions } from 'react-native'
 
 const Tab = createBottomTabNavigator<AppRoutes>()
 

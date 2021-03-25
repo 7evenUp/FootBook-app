@@ -1,20 +1,23 @@
 import React from 'react'
-import { StyleSheet, TextInput } from 'react-native'
-import { palette } from '../../../themes/default'
+import { StyleSheet, TextInput as RNTextInput, TextInputProps as RNTextInputProps } from 'react-native'
+import { palette } from '../themes/default'
 
-interface InputProps {
-  placeholder: string
-  isPassword?: boolean
+interface TextInputProps extends RNTextInputProps {
+  isPassword?: boolean,
+  touched?: boolean,
+  error?: string
 }
 
-export const Input = ({ placeholder, isPassword }: InputProps) => {
+const TextInput = ({ placeholder, isPassword, touched, error, onChangeText, value }: TextInputProps) => {
   return (
-    <TextInput
+    <RNTextInput
       style={styles.input}
       placeholder={placeholder}
       placeholderTextColor={palette.greyLight}
       secureTextEntry={isPassword ? true : false}
-      autoCapitalize="none" />
+      autoCapitalize="none"
+      onChangeText={onChangeText}
+      value={value} />
   )
 }
 
@@ -32,3 +35,5 @@ const styles = StyleSheet.create({
     marginTop: 48
   }
 })
+
+export default TextInput
