@@ -6,14 +6,22 @@ import { useDispatch } from 'react-redux'
 import { ProfileStackRoutes, StackNavigationProps } from '../../navigation/types'
 import { userLogout } from '../../redux/user/actions'
 import { Box, palette, Text } from '../../themes/default'
+import firebase from '../../firebase/firebaseConfig'
 
 const ProfileMain = ({ navigation, route }: StackNavigationProps<ProfileStackRoutes, 'ProfileMain'>) => {
   const dispatch = useDispatch()
+  const currentUser = firebase.auth().currentUser
+  
+  // console.log(firebase.auth().currentUser)
+
+  // firebase.auth().currentUser?.updateProfile({
+  //   displayName: 'Artyom Sheludeshev'
+  // })
   
   return (
     <Box style={styles.container}>
       <Image source={require('../../../assets/me2017.png')} style={styles.avatar}/>
-      <Text variant="Poppins700Size24ColorBlack" mt="l">Artemé le Pont</Text>
+      <Text variant="Poppins700Size24ColorBlack" mt="l">{currentUser?.displayName ? currentUser?.displayName : 'Here will be your name'}</Text>
       <Box mt="l">
         <TouchableNativeFeedback
           style={styles.listItem}
@@ -39,7 +47,7 @@ const ProfileMain = ({ navigation, route }: StackNavigationProps<ProfileStackRou
         <TouchableNativeFeedback
           style={styles.listItem}
           onPress={() => navigation.navigate('EditProfile')}>
-          <MaterialIcons name="edit" size={29} color={palette.purple} />
+          <MaterialIcons name="edit" size={29} color={palette.cyan} />
           <Text variant="Poppins400Size18ColorBlack" ml="l">Edit profile</Text>
         </TouchableNativeFeedback>
 
