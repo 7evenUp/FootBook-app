@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { useNavigation } from '@react-navigation/core'
 import { useDispatch, useSelector } from 'react-redux'
