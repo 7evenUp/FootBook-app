@@ -10,9 +10,9 @@ export const userFetchingMiddleware: Middleware<{}, RootState> = store => next =
   console.log('=================== INSIDE MIDDLEWARE ===================')
 
   if (action.type === USER_SIGNIN) {
-    // 'sheludeshev.artyom@mail.ru', 'Artem2001.'
-    firebase.auth().signInWithEmailAndPassword(action.payload.email, action.payload.password)
-      .then(() => store.dispatch(userSuccess({ user: { email: action.payload.email }, isLogedIn: true })))
+    // firebase.auth().signInWithEmailAndPassword(action.payload.email, action.payload.password)
+    firebase.auth().signInWithEmailAndPassword('sheludeshev.artyom@mail.ru', 'Artem2001.')
+      .then(() => store.dispatch(userSuccess({ user: { email: 'sheludeshev.artyom@mail.ru' }, isLogedIn: true })))
       .catch(function (error) {
         const errorCode = error.code
         const errorMessage = error.message
