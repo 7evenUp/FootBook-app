@@ -18,6 +18,10 @@ export const USER_FAILURE = 'USER_FAILURE'
 
 interface UserSignInAction {
   type: typeof USER_SIGNIN
+  payload: {
+    email: string,
+    password: string
+  }
 }
 
 interface UserSignUpAction {

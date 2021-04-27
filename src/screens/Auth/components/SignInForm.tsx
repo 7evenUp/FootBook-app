@@ -26,7 +26,7 @@ export const SignInForm = () => {
     <View style={styles.form}>
       <Formik
         initialValues={{ email: '', password: '' }}
-        onSubmit={(values: FormValues) => console.log(values)}>
+        onSubmit={(values: FormValues) => dispatch(userSignIn(values))}>
         {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
           <>
             <TextInput

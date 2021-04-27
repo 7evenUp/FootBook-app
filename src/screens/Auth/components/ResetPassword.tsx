@@ -16,6 +16,7 @@ interface FormValues {
 export const ResetPassword = () => {
   const navigation = useNavigation()
   const dispatch = useDispatch()
+  console.log("======== Reset Password Form ========")
 
   return (
     <View style={styles.form}>

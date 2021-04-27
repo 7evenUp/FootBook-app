@@ -8,8 +8,9 @@ import {
   USER_FAILURE
 } from './types'
 
-export const userSignIn = ():UserActionTypes => ({
-  type: USER_SIGNIN
+export const userSignIn = (payload: { email: string, password: string}):UserActionTypes => ({
+  type: USER_SIGNIN,
+  payload
 })
 
 export const userSignUp = ():UserActionTypes => ({
