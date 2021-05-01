@@ -20,8 +20,10 @@ const ProfileMain = ({ navigation, route }: StackNavigationProps<ProfileStackRou
   
   return (
     <Box style={styles.container}>
-      <Image source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/soccerapp-336fa.appspot.com/o/users%2FnXJ2XLtDB6O4YPblExMzfVMFyI42%2F30387833.png?alt=media&token=a4b788d7-48af-4f01-8e5c-58af6d71d6ba'}} style={styles.avatar} />
-      {/* <Image source={require('../../../assets/me2017.png')} style={styles.avatar}/> */}
+      { currentUser?.photoURL ?
+        <Image source={{ uri: currentUser?.photoURL }} style={styles.avatar} /> :
+        <Image source={require('../../../assets/me2017.png')} style={styles.avatar} />
+      }
       <Text variant="Poppins700Size24ColorBlack" mt="l">{currentUser?.displayName ? currentUser?.displayName : 'Here will be your name'}</Text>
       <Box mt="l">
         <TouchableNativeFeedback

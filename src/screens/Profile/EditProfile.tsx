@@ -8,27 +8,27 @@ import firebase from '../../firebase/firebaseConfig'
 async function uploadImageAsync(uri: string, uid: string | undefined, extension: string) {
   // Why are we using XMLHttpRequest? See:
   // https://github.com/expo/expo/issues/2402#issuecomment-443726662
-  const blob = await new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
+  const blob: Blob = await new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest()
     xhr.onload = function () {
-      resolve(xhr.response);
+      resolve(xhr.response)
     };
     xhr.onerror = function (e) {
-      console.log(e);
-      reject(new TypeError('Network request failed'));
+      console.log(e)
+      reject(new TypeError('Network request failed'))
     };
-    xhr.responseType = 'blob';
-    xhr.open('GET', uri, true);
-    xhr.send(null);
+    xhr.responseType = 'blob'
+    xhr.open('GET', uri, true)
+    xhr.send(null)
   });
 
   const ref = firebase.storage().ref(`users/${uid}/profilePhoto.${extension}`)
-  const snapshot = await ref.put(blob);
+  const snapshot = await ref.put(blob)
 
   // We're done with the blob, close and release it
-  blob.close();
+  blob.close()
 
-  return await snapshot.ref.getDownloadURL();
+  return await snapshot.ref.getDownloadURL()
 }
 
 const EditProfile = () => {
@@ -60,14 +60,20 @@ const EditProfile = () => {
       // setImage(result.uri)
       const dotIndex = result.uri.lastIndexOf('.')
       const ext = result.uri.substr(dotIndex + 1)
-      uploadImageAsync(result.uri, currentUser?.uid, ext)
+      const uploadedPhotoUrl = await uploadImageAsync(result.uri, currentUser?.uid, ext)
+      firebase.auth().currentUser?.updateProfile({
+        photoURL: uploadedPhotoUrl
+      })
     }
   };
 
   return (
     <Box style={styles.container}>
       <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
-        <Image source={require('../../../assets/me2017.png')} style={styles.avatar} />
+        {currentUser?.photoURL ?
+          <Image source={{ uri: currentUser?.photoURL }} style={styles.avatar} /> :
+          <Image source={require('../../../assets/me2017.png')} style={styles.avatar} />
+        }
         <Text variant="Poppins400Size18ColorCyan" mt="l">Change profile photo</Text>
       </TouchableOpacity>
       
