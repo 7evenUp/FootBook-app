@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Image, Dimensions } from 'react-native'
+import { useIsFocused } from '@react-navigation/native'
 import { TouchableNativeFeedback } from 'react-native-gesture-handler'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'
 import { useDispatch } from 'react-redux'
@@ -9,8 +10,14 @@ import { Box, palette, Text } from '../../themes/default'
 import firebase from '../../firebase/firebaseConfig'
 
 const ProfileMain = ({ navigation, route }: StackNavigationProps<ProfileStackRoutes, 'ProfileMain'>) => {
+  const isFocused = useIsFocused()
+  const [currentUser, setCurrentUser] = useState(firebase.auth().currentUser)
+
+  useEffect(() => {
+    setCurrentUser(firebase.auth().currentUser)
+  }, [isFocused])
+
   const dispatch = useDispatch()
-  const currentUser = firebase.auth().currentUser
   
   // console.log(firebase.auth().currentUser)
 
@@ -22,7 +29,7 @@ const ProfileMain = ({ navigation, route }: StackNavigationProps<ProfileStackRou
     <Box style={styles.container}>
       { currentUser?.photoURL ?
         <Image source={{ uri: currentUser?.photoURL }} style={styles.avatar} /> :
-        <Image source={require('../../../assets/me2017.png')} style={styles.avatar} />
+        <Image source={require('../../../assets/Unknown-person.png')} style={styles.avatar} />
       }
       <Text variant="Poppins700Size24ColorBlack" mt="l">{currentUser?.displayName ? currentUser?.displayName : 'Here will be your name'}</Text>
       <Box mt="l">

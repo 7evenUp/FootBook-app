@@ -76,7 +76,7 @@ const assets = [
   require('../../assets/exercises/18.mp4'),
   require('../../assets/app-icon.png'),
   require('../../assets/app-logo.png'),
-  require('../../assets/me2017.png')
+  require('../../assets/Unknown-person.png')
 ]
 
 const Stack = createStackNavigator()

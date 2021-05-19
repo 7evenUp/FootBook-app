@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dimensions, StyleSheet, View } from 'react-native'
+import { Dimensions, StyleSheet, View, Button } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { ProfileStackRoutes } from '../../navigation/types'
 import ProfileMain from './ProfileMain'
@@ -35,9 +35,9 @@ const ProfileStackScreen = () => {
         <Stack.Screen
           name="EditProfile"
           component={EditProfile}
-          options={{
-            title: 'Edit profile'
-          }}/>
+          options={({navigation, route}) => ({
+            headerTitle: 'Edit profile'
+          })} />
       </Stack.Navigator>
     </View>
   )
