@@ -7,7 +7,7 @@ import firebase from '../../firebase/firebaseConfig'
 export const userFetchingMiddleware: Middleware<{}, RootState> = store => next => action => {
   const result = next(action)
 
-  console.log('=================== INSIDE MIDDLEWARE ===================')
+  console.log('=================== INSIDE USER MIDDLEWARE ===================')
 
   if (action.type === USER_SIGNIN) {
     // firebase.auth().signInWithEmailAndPassword(action.payload.email, action.payload.password)

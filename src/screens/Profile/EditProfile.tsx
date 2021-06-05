@@ -29,7 +29,7 @@ async function uploadImageAsync(uri: string, uid: string | undefined, extension:
   const ref = firebase.storage().ref(`users/${uid}/profilePhoto.${extension}`)
   const snapshot = await ref.put(blob)
 
-  // We're done with the blob, close and release it
+  // We're done with the blob, close and release it 
   blob.close()
 
   return await snapshot.ref.getDownloadURL()
