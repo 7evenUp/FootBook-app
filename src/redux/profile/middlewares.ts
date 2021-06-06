@@ -9,12 +9,40 @@ import {
 } from './actions'
 import firebase from '../../firebase/firebaseConfig'
 
-export const profileMiddleware: Middleware<{}, RootState> = store => next => (action: ProfileActionTypes) => {
+export const profileMiddleware: Middleware<{}, RootState> = store => next => async (action: ProfileActionTypes) => {
   const result = next(action)
 
   console.log('=================== INSIDE PROFILE MIDDLEWARE ===================')
 
   if (action.type === PROFILE_UPDATE_PHOTO_REQUEST) {
     // action.payload.blob
+    const { photoUri, uid } = action.payload
+    const dotIndex = photoUri.lastIndexOf('.')
+    const ext = photoUri.substr(dotIndex + 1)
+
+    const blob: Blob = await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest()
+      xhr.onload = function () {
+        resolve(xhr.response)
+      };
+      xhr.onerror = function (e) {
+        console.log(e)
+        reject(new TypeError('Network request failed'))
+      };
+      xhr.responseType = 'blob'
+      xhr.open('GET', photoUri, true)
+      xhr.send(null)
+    });
+
+    const ref = firebase.storage().ref(`users/${uid}/profilePhoto.${ext}`)
+    const snapshot = await ref.put(blob)
+
+    blob.close()
+
+    firebase.auth().currentUser?.updateProfile({
+      photoURL: await snapshot.ref.getDownloadURL()
+    })
   }
+
+  return result
 }

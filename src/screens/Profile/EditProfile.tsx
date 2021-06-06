@@ -2,38 +2,14 @@ import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { StyleSheet, Image, Platform } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import * as ImagePicker from 'expo-image-picker'
+import { useDispatch } from 'react-redux'
+import { profileUpdatePhotoRequest } from '../../redux/profile/actions'
 import { Box, palette, Text } from '../../themes/default'
 import firebase from '../../firebase/firebaseConfig'
 import { ProfileStackRoutes, StackNavigationProps } from '../../navigation/types'
 import { Ionicons } from '@expo/vector-icons'
 import { useFormik } from 'formik'
 import { TextInput } from '../../components'
-
-async function uploadImageAsync(uri: string, uid: string | undefined, extension: string) {
-  // Why are we using XMLHttpRequest? See:
-  // https://github.com/expo/expo/issues/2402#issuecomment-443726662
-  const blob: Blob = await new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest()
-    xhr.onload = function () {
-      resolve(xhr.response)
-    };
-    xhr.onerror = function (e) {
-      console.log(e)
-      reject(new TypeError('Network request failed'))
-    };
-    xhr.responseType = 'blob'
-    xhr.open('GET', uri, true)
-    xhr.send(null)
-  });
-
-  const ref = firebase.storage().ref(`users/${uid}/profilePhoto.${extension}`)
-  const snapshot = await ref.put(blob)
-
-  // We're done with the blob, close and release it 
-  blob.close()
-
-  return await snapshot.ref.getDownloadURL()
-}
 
 interface FormValues {
   nickname: string
@@ -42,6 +18,7 @@ interface FormValues {
 const EditProfile = ({ navigation }: StackNavigationProps<ProfileStackRoutes, "EditProfile">) => {
   const currentUser = firebase.auth().currentUser
   const [image, setImage] = useState(currentUser?.photoURL)
+  const dispath = useDispatch()
 
   const formik = useFormik({
     initialValues: {
@@ -89,13 +66,12 @@ const EditProfile = ({ navigation }: StackNavigationProps<ProfileStackRoutes, "E
     })
 
     if (!result.cancelled) {
-      const dotIndex = result.uri.lastIndexOf('.')
-      const ext = result.uri.substr(dotIndex + 1)
-      const uploadedPhotoUrl = await uploadImageAsync(result.uri, currentUser?.uid, ext)
-      firebase.auth().currentUser?.updateProfile({
-        photoURL: uploadedPhotoUrl
-      })
-      setImage(uploadedPhotoUrl)
+      dispath(profileUpdatePhotoRequest({
+        photoUri: result.uri,
+        uid: currentUser?.uid
+      }))
+
+      setImage(firebase.auth().currentUser?.photoURL)
     }
   };
 

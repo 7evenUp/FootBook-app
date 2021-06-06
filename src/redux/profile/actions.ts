@@ -9,7 +9,7 @@ import {
   PROFILE_UPDATE_NAME_FAILURE
 } from './types'
 
-export const profileUpdatePhotoRequest = (payload: { blob: Blob }): ProfileActionTypes => ({
+export const profileUpdatePhotoRequest = (payload: { photoUri: string, uid?: string}): ProfileActionTypes => ({
   type: PROFILE_UPDATE_PHOTO_REQUEST,
   payload
 })

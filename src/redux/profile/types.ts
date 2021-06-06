@@ -20,7 +20,8 @@ export const PROFILE_UPDATE_NAME_FAILURE = 'PROFILE_UPDATE_NAME_FAILURE'
 interface ProfileUpdatePhotoRequestAction {
   type: typeof PROFILE_UPDATE_PHOTO_REQUEST
   payload: {
-    blob: Blob
+    photoUri: string
+    uid?: string
   }
 }
 
