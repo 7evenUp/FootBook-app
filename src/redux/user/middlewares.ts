@@ -13,7 +13,7 @@ export const userFetchingMiddleware: Middleware<{}, RootState> = store => next =
     // firebase.auth().signInWithEmailAndPassword(action.payload.email, action.payload.password)
     firebase.auth().signInWithEmailAndPassword('sheludeshev.artyom@mail.ru', 'Artem2001.')
       .then(() => store.dispatch(userSuccess({ user: { email: 'sheludeshev.artyom@mail.ru' }, isLogedIn: true })))
-      .catch(function (error) {
+      .catch(error => {
         const errorCode = error.code
         const errorMessage = error.message
         if (errorCode === 'auth/wrong-password') {
@@ -21,14 +21,14 @@ export const userFetchingMiddleware: Middleware<{}, RootState> = store => next =
         } else {
           store.dispatch(userFailure(errorMessage))
         }
-        console.log(error)
+        console.error("Error: " + error)
     })
   }
 
   if (action.type === USER_SIGNUP) {
     firebase.auth().createUserWithEmailAndPassword('sheludeshev@mail.ru', 'Artem2001.')
       .then(() => store.dispatch(userSuccess({ user: { email: 'sheludeshev@mail.ru' }, isLogedIn: true })))
-      .catch(function (error) {
+      .catch(error => {
         const errorCode = error.code
         const errorMessage = error.message
         if (errorCode === 'auth/wrong-password') {
@@ -36,18 +36,18 @@ export const userFetchingMiddleware: Middleware<{}, RootState> = store => next =
         } else {
           store.dispatch(userFailure(`${errorCode}: ${errorMessage}`))
         }
-        console.log(error)
+        console.error("Error: " + error)
       })
   }
 
   if (action.type === USER_LOGOUT) {
     firebase.auth().signOut()
       .then(() => store.dispatch(userSuccess({ user: {email: ''}, isLogedIn: false })))
-      .catch(function (error) {
+      .catch(error => {
         const errorCode = error.code
         const errorMessage = error.message
         store.dispatch(userFailure(`${errorMessage} === Error code: ${errorCode}`))
-        console.log(error)
+        console.error("Error: " + error)
       })
   }
 

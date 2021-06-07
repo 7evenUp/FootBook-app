@@ -2,7 +2,8 @@ import React, { useState, useEffect, useLayoutEffect } from 'react'
 import { StyleSheet, Image, Platform } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import * as ImagePicker from 'expo-image-picker'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { photoUrlSelector } from '../../redux/profile/selectors'
 import { profileUpdatePhotoRequest } from '../../redux/profile/actions'
 import { Box, palette, Text } from '../../themes/default'
 import firebase from '../../firebase/firebaseConfig'
@@ -19,6 +20,8 @@ const EditProfile = ({ navigation }: StackNavigationProps<ProfileStackRoutes, "E
   const currentUser = firebase.auth().currentUser
   const [image, setImage] = useState(currentUser?.photoURL)
   const dispath = useDispatch()
+
+  const photoURL = useSelector(photoUrlSelector)
 
   const formik = useFormik({
     initialValues: {

@@ -25,6 +25,7 @@ export const profileReducer = (state = initialState, action: ProfileActionTypes)
         ...state,
         isFetching: true,
         profile: {
+          ...state.profile,
           photoURL: ''
         },
         error: null
@@ -34,6 +35,7 @@ export const profileReducer = (state = initialState, action: ProfileActionTypes)
         ...state,
         isFetching: false,
         profile: {
+          ...state.profile,
           photoURL: action.payload.photoUrl
         },
         error: null
@@ -43,6 +45,7 @@ export const profileReducer = (state = initialState, action: ProfileActionTypes)
         ...state,
         isFetching: false,
         profile: {
+          ...state.profile,
           photoURL: ''
         },
         error: action.error

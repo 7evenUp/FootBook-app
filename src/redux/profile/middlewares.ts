@@ -15,7 +15,6 @@ export const profileMiddleware: Middleware<{}, RootState> = store => next => asy
   console.log('=================== INSIDE PROFILE MIDDLEWARE ===================')
 
   if (action.type === PROFILE_UPDATE_PHOTO_REQUEST) {
-    // action.payload.blob
     const { photoUri, uid } = action.payload
     const dotIndex = photoUri.lastIndexOf('.')
     const ext = photoUri.substr(dotIndex + 1)
@@ -36,12 +35,19 @@ export const profileMiddleware: Middleware<{}, RootState> = store => next => asy
 
     const ref = firebase.storage().ref(`users/${uid}/profilePhoto.${ext}`)
     const snapshot = await ref.put(blob)
+    const downloadURL = await snapshot.ref.getDownloadURL()
 
     blob.close()
 
     firebase.auth().currentUser?.updateProfile({
-      photoURL: await snapshot.ref.getDownloadURL()
-    })
+      photoURL: downloadURL
+    }).then(() => store.dispatch(profileUpdatePhotoSuccess(downloadURL)))
+      .catch(error => {
+        const errorCode = error.code
+        const errorMessage = error.message
+        store.dispatch(profileUpdatePhotoFailure(`${errorMessage} === Error code: ${errorCode}`))
+        console.error("Error: " + error)
+      })
   }
 
   return result
