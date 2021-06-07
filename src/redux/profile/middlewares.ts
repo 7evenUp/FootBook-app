@@ -41,7 +41,11 @@ export const profileMiddleware: Middleware<{}, RootState> = store => next => asy
 
     firebase.auth().currentUser?.updateProfile({
       photoURL: downloadURL
-    }).then(() => store.dispatch(profileUpdatePhotoSuccess(downloadURL)))
+    }).then(() => {
+      console.log('DOWNLOADED')
+      console.log(downloadURL)
+      return store.dispatch(profileUpdatePhotoSuccess({ photoUrl: downloadURL }))
+    })
       .catch(error => {
         const errorCode = error.code
         const errorMessage = error.message

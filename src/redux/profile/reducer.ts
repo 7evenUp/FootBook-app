@@ -1,6 +1,7 @@
 import {
   ProfileState,
   ProfileActionTypes,
+  PROFILE_SET_PHOTO,
   PROFILE_UPDATE_PHOTO_REQUEST,
   PROFILE_UPDATE_PHOTO_SUCCESS,
   PROFILE_UPDATE_PHOTO_FAILURE,
@@ -20,6 +21,16 @@ const initialState: ProfileState = {
 
 export const profileReducer = (state = initialState, action: ProfileActionTypes): ProfileState => {
   switch (action.type) {
+    case PROFILE_SET_PHOTO:
+      return {
+        ...state,
+        isFetching: false,
+        profile: {
+          ...state.profile,
+          photoURL: action.payload.photoURL
+        },
+        error: null
+      }
     case PROFILE_UPDATE_PHOTO_REQUEST:
       return {
         ...state,
@@ -31,6 +42,7 @@ export const profileReducer = (state = initialState, action: ProfileActionTypes)
         error: null
       }
     case PROFILE_UPDATE_PHOTO_SUCCESS:
+      console.log('inside reducer: ', action.payload.photoUrl)
       return {
         ...state,
         isFetching: false,

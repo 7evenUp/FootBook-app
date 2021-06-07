@@ -9,6 +9,7 @@ export interface ProfileState {
   error: string | null
 }
 
+export const PROFILE_SET_PHOTO = 'profile/setPhoto'
 export const PROFILE_UPDATE_PHOTO_REQUEST = 'PROFILE_UPDATE_PHOTO_REQUEST'
 export const PROFILE_UPDATE_PHOTO_SUCCESS = 'PROFILE_UPDATE_PHOTO_SUCCESS'
 export const PROFILE_UPDATE_PHOTO_FAILURE = 'PROFILE_UPDATE_PHOTO_FAILURE'
@@ -16,6 +17,12 @@ export const PROFILE_UPDATE_NAME_REQUEST = 'PROFILE_UPDATE_NAME_REQUEST'
 export const PROFILE_UPDATE_NAME_SUCCESS = 'PROFILE_UPDATE_NAME_SUCCESS'
 export const PROFILE_UPDATE_NAME_FAILURE = 'PROFILE_UPDATE_NAME_FAILURE'
 
+interface ProfileSetPhotoAction {
+  type: typeof PROFILE_SET_PHOTO
+  payload: {
+    photoURL: string
+  }
+}
 
 interface ProfileUpdatePhotoRequestAction {
   type: typeof PROFILE_UPDATE_PHOTO_REQUEST
@@ -56,7 +63,8 @@ interface ProfileUpdateNameFailureAction {
   error: string
 }
 
-export type ProfileActionTypes =  ProfileUpdatePhotoRequestAction |
+export type ProfileActionTypes = ProfileSetPhotoAction |
+  ProfileUpdatePhotoRequestAction |
   ProfileUpdatePhotoSuccessAction |
   ProfileUpdatePhotoFailureAction |
   ProfileUpdateNameRequestAction |

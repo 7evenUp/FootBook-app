@@ -4,7 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import * as ImagePicker from 'expo-image-picker'
 import { useDispatch, useSelector } from 'react-redux'
 import { photoUrlSelector } from '../../redux/profile/selectors'
-import { profileUpdatePhotoRequest } from '../../redux/profile/actions'
+import { profileUpdatePhotoRequest, profileSetPhoto } from '../../redux/profile/actions'
 import { Box, palette, Text } from '../../themes/default'
 import firebase from '../../firebase/firebaseConfig'
 import { ProfileStackRoutes, StackNavigationProps } from '../../navigation/types'
@@ -18,10 +18,11 @@ interface FormValues {
 
 const EditProfile = ({ navigation }: StackNavigationProps<ProfileStackRoutes, "EditProfile">) => {
   const currentUser = firebase.auth().currentUser
-  const [image, setImage] = useState(currentUser?.photoURL)
   const dispath = useDispatch()
 
   const photoURL = useSelector(photoUrlSelector)
+
+  currentUser?.photoURL && dispath(profileSetPhoto({ photoURL: currentUser?.photoURL }))
 
   const formik = useFormik({
     initialValues: {
@@ -73,16 +74,14 @@ const EditProfile = ({ navigation }: StackNavigationProps<ProfileStackRoutes, "E
         photoUri: result.uri,
         uid: currentUser?.uid
       }))
-
-      setImage(firebase.auth().currentUser?.photoURL)
     }
   };
 
   return (
     <Box style={styles.container}>
       <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
-        {currentUser?.photoURL ?
-          <Image source={{ uri: image }} style={styles.avatar} /> :
+        {photoURL ?
+          <Image source={{ uri: photoURL }} style={styles.avatar} /> :
           <Image source={require('../../../assets/Unknown-person.png')} style={styles.avatar} />
         }
         <Text variant="Poppins400Size18ColorCyan" mt="l">Change profile photo</Text>
