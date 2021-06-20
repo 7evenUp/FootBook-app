@@ -96,7 +96,6 @@ const EditProfile = ({ navigation }: StackNavigationProps<ProfileStackRoutes, "E
           error={formik.errors.nickname}
           touched={formik.touched.nickname} />
       </Box>
-      
     </Box>
   )
 }
