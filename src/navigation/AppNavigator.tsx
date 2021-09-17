@@ -34,6 +34,7 @@ const AppTabs = () => {
         activeTintColor: palette.greenDark,
         inactiveTintColor: palette.greyDark,
         showLabel: false,
+        keyboardHidesTabBar: true,
         style: { backgroundColor: palette.greenLight }
       }}
     >
